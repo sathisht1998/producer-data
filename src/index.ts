@@ -10,9 +10,18 @@ import router  from './router';
 
 const app =express();
 
-app.use(cors({
-    credentials: true,
-}));
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5500');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    next();
+});
+
+// app.use(cors({    
+//     credentials: true,
+// }));
+
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(compression());
