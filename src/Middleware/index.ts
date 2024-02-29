@@ -17,6 +17,9 @@ export const isAuthenticated = async (req: express.Request, res: express.Respons
       return res.sendStatus(403);
     }
 
+
+    res.locals.loggedInUser = existingUser;
+
     merge(req, { identity: existingUser });
 
     return next();
@@ -45,3 +48,5 @@ export const isOwner = async (req: express.Request, res: express.Response, next:
     return res.sendStatus(400);
   }
 }
+
+
